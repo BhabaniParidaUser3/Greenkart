@@ -31,7 +31,7 @@ public class Base {
         
 		
 		//usecase02: To select multiple product
-		String[] itemsneeded = { "Cucumber", "Brocolli", "Beetroot" };
+		String[] itemsneeded = { "Cucumber", "Brocolli", "Beetroot","Carrot","Brinjal" };
 		List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
 		for (int i = 0; i < products.size(); i++) {
 			String[] name = products.get(i).getText().split("-");
@@ -41,14 +41,14 @@ public class Base {
 			if (itemsNeededList.contains(formattedname)) {
 				j++;
 				driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
-				if(j==3)
+				if(j==itemsneeded.length)
 				{
 					break;
 				}
 			}
 		}
 
-		 driver.close();
+		 //driver.close();
 
 	}
 
