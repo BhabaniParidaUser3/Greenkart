@@ -18,20 +18,23 @@ public class Base {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
-		int j=0;
+		String[] itemsneeded = { "Cucumber", "Brocolli", "Beetroot", "Carrot", "Brinjal" };
+		addItems(driver, itemsneeded);
 
-		//Usecase01: To select particular one product(hardcoded)
-		/*
+	}
+
+	public static void addItems(WebDriver driver, String[] itemsneeded) {
+		// Usecase01: To select particular one product(hardcoded)
+		/* 
 		 * List<WebElement>productName=driver.findElements(By.cssSelector(
 		 * "h4.product-name")); for(int i=0;i<productName.size();i++) {
 		 * if(productName.get(i).getText().contains("Cucumber")) {
 		 * driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click(
 		 * ); break; } }
 		 */
-        
-		
-		//usecase02: To select multiple product
-		String[] itemsneeded = { "Cucumber", "Brocolli", "Beetroot","Carrot","Brinjal" };
+
+		// usecase02: To select multiple product
+		int j = 0;
 		List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
 		for (int i = 0; i < products.size(); i++) {
 			String[] name = products.get(i).getText().split("-");
@@ -41,14 +44,13 @@ public class Base {
 			if (itemsNeededList.contains(formattedname)) {
 				j++;
 				driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
-				if(j==itemsneeded.length)
-				{
+				if (j == itemsneeded.length) {
 					break;
 				}
 			}
 		}
 
-		 //driver.close();
+		driver.close();
 
 	}
 
