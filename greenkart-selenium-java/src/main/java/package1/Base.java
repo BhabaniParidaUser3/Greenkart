@@ -15,6 +15,7 @@ public class Base {
 		// TODO Auto-generated method stub
 		System.setProperty("webdriver.chrome.driver", "G:\\RahulShetty\\chromedriver-win64\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
+		//implicit wait
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
@@ -25,7 +26,7 @@ public class Base {
 
 	public static void addItems(WebDriver driver, String[] itemsneeded) {
 		// Usecase01: To select particular one product(hardcoded)
-		/* 
+		/*
 		 * List<WebElement>productName=driver.findElements(By.cssSelector(
 		 * "h4.product-name")); for(int i=0;i<productName.size();i++) {
 		 * if(productName.get(i).getText().contains("Cucumber")) {
@@ -49,7 +50,11 @@ public class Base {
 				}
 			}
 		}
-
+		driver.findElement(By.xpath("//img[@alt='Cart']")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]")).click();
+		driver.findElement(By.cssSelector("input.promoCode")).sendKeys("Bhabani");
+		driver.findElement(By.cssSelector("button.promoBtn")).click();
+		System.out.println(driver.findElement(By.cssSelector("span.promoInfo")).getText());
 		driver.close();
 
 	}
