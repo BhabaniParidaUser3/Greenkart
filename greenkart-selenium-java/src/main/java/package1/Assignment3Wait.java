@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,7 +28,7 @@ public class Assignment3Wait {
 		String username="rahulshettyacademy";
 		String password="learning";
 		login(driver,username,password,wait);
-		additem(driver,itemsNeed);		
+		additem(driver,itemsNeed,wait);		
 		
 
 	}
@@ -50,15 +51,17 @@ public class Assignment3Wait {
 		
 		
 	}
-	public static void additem(WebDriver driver,String[] itemsNeed)
+	public static void additem(WebDriver driver,String[] itemsNeed,WebDriverWait wait)
 	{
 		List<WebElement> itemOnPage=driver.findElements(By.cssSelector("h4.card-title"));
 		List itemsneedList=Arrays.asList(itemsNeed);
 		int j=0;
 
 		for (int i=0;i<itemOnPage.size();i++)
-		{
-			if(itemOnPage.contains(itemsneedList))
+		{ 
+			String name = itemOnPage.get(i).getText();
+			
+			if(itemsneedList.contains(name))
 			{
 				j++;
 				driver.findElements(By.xpath("//button[@class='btn btn-info']")).get(i).click();
